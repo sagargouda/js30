@@ -1,0 +1,23 @@
+window.addEventListener("keydown", function (e) {
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+
+  const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+  if (!audio) {
+    return;
+  }
+  /// for playing back over and over again.
+  audio.currentTime = 0;
+  audio.play();
+
+  key.classList.add("playing");
+});
+
+function removeTransition(e) {
+  this.classList.remove("playing");
+}
+
+const keys = document.querySelectorAll(".key");
+keys.forEach((key) => {
+  return key.addEventListener("transitionend", removeTransition);
+});
